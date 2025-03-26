@@ -1,0 +1,364 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "League Spartan", sans-serif;
+  overflow-x: hidden;
+
+  background-color: #DF9DC9;
+}
+
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  padding: 42px 0;
+
+  background-color: #ACECF7;
+}
+
+.slider-track {
+  display: flex;
+  width: max-content;
+  animation: scroll 20s linear infinite;
+}
+
+.pill-slider {
+  flex: 0 0 85px;
+  height: 210px;
+  margin: 0 38px;
+  border-radius: 117px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transform: rotate(30deg);
+  filter: blur(20px);
+}
+
+.pill-slider:hover {
+  filter: blur(0);
+  cursor: pointer;
+}
+
+.pill-slider--explore {
+  background-color: #78C850;
+}
+
+.pill-slider--enjoy {
+  background-color: #FFD700;
+}
+
+.pill-slider--study {
+  background-color: #5691F0;
+}
+
+.pill-slider--love {
+  background-color: #E85050;
+}
+
+.pill-slider--believe {
+  background-color: #BC13FE;
+}
+
+.pill-slider--play {
+  background-color: #FF8C42;
+}
+
+.rotated-text {
+  font-family: League Spartan;
+  font-weight: 400;
+  font-size: 29px;
+  color: white;
+
+  transform: rotate(-90deg);
+  display: inline-block;
+}
+
+@keyframes scroll {
+  0% {
+      transform: translateX(0);
+  }
+  100% {
+      transform: translateX(calc(-85px * var(--blocks-to-scroll)));
+  }
+}
+
+@media (max-width: 768px) {
+  .slider-track {
+      --blocks-to-scroll: 7; /* На мобильных прокручиваем 7 блоков */
+  }
+}
+
+@media (min-width: 769px) {
+  .slider-track {
+      --blocks-to-scroll: 14; /* На десктопах — 14 */
+  }
+}
+
+/* Скролл бар */
+.infinite-scroll-container {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  background: #FFFFFF;
+  padding: 11px 0;
+}
+
+.infinite-scroll-text {
+  display: inline-block;
+  animation: scrollText 20s linear infinite;
+  will-change: transform;
+}
+
+.infinite-scroll-text span {
+  display: inline-block;
+  padding: 0 210px;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 40px;
+  
+  color: #FF8C42;
+  position: relative;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Сдвигаем на половину ширины */
+  }
+}
+
+/* Пилюли */
+.three-screen__bottom {
+  justify-content: space-between;
+}
+
+.three-screen__pill {
+  display: flex;
+  width: 620px;
+  height: 492px;
+
+  border-radius: 60px;
+  background-color: #F4989C;
+}
+
+.parts-container {
+  display: flex;
+  width: 1776px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.bottom-parts, .top-parts {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 86px 102px;
+  justify-content: space-between;
+  width: 838px;
+  height: 493px;
+  border-radius: 60px;
+
+}
+
+.bottom-parts {
+  background-color: #ACECF7;
+}
+
+.top-parts {
+  background-color: #D6F6DD;
+}
+
+.pill-part {
+  position: relative;
+  width: 78px;
+  height: 165px;
+  margin: 0px 50px;
+  margin-top: 10px;
+  border-radius: 30px;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  user-select: none;
+  transition: transform 0.2s;
+  transform: rotate(30deg);
+}
+
+.pill-part.dragging {
+  transform: rotate(30deg) scale(1.1);
+  z-index: 100;
+}
+
+.bottom-part {
+  border-bottom-left-radius: 60px;
+  border-bottom-right-radius: 60px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.top-part {
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.result-pill {
+  width: 78px;
+  height: 330px;
+  border-radius: 60px;
+  background: linear-gradient(to bottom, #ccc 50%, #999 50%);
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(30deg);
+}
+
+/* глаза */
+.three-screen__bottom {
+  display: flex;
+}
+
+.eyes {
+  display: flex;
+  width: 572px;
+  height: 492px;
+
+  background-color: #DAC4F7;
+  border-radius: 60px;
+}
+
+.eyes-container {
+  position: relative;
+
+  width: 476px;
+  height: 220px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eye {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  background: white;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.pupil {
+  position: absolute;
+  width: 105px;
+  height: 105px;
+  background: #000;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+/* Сложная физика */
+.four-screen {
+  background-color: linear-gradient(0deg, #EBD2B4 81.04%, #DF9DC9 100%);
+}
+        
+.four-screen {
+  width: 100%;
+  height: 1055px;
+  position: relative;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+#canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#preview-text {
+  position: absolute;
+  top: 330px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 10;
+  text-align: center;
+}
+
+.content-below {
+  height: 1000px;
+  padding: 20px;
+  background: #e0e0e0;
+}
+
+.pill-blur {
+  filter: blur(20px);
+  transition: filter 0.3s ease;
+}
+
+.pill-no-blur {
+  filter: none;
+}
+
+.color-flow-text {
+  width: 264px;
+  height: 74px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "League Spartan", sans-serif;
+
+  font-family: League Spartan;
+  font-weight: 400;
+  font-size: 30px;
+  text-align: center;
+
+}
+
+.flow-line {
+  margin: 2px 0;
+  background: linear-gradient(90deg, 
+    #78C850, #5D95F0, #BD17FE, 
+    #E85050, #FF8C42, #E85050,
+    #BD17FE, #5D95F0, #78C850);
+  background-size: 800% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: flowColors 8s linear infinite;
+}
+
+@keyframes flowColors {
+  0% { background-position: 0% center; }
+  100% { background-position: 100% center; }
+}
