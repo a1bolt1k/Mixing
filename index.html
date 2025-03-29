@@ -6,11 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mixing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
-    <script type="module" crossorigin src="/Mixing/assets/index-TPf-Br2Q.js"></script>
-    <link rel="stylesheet" crossorigin href="/Mixing/assets/index-YZyGenvH.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gpu.js@2.15.0/dist/gpu-browser.min.js"></script>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/liquidfun@1.1.0/liquidfun.min.js"></script>
+   <script src="/node_modules/liquidfun-emscripten/liquidfun.js"></script>
+  <script>
+    if (typeof liquidfun === 'undefined') {
+      alert('LiquidFun не загрузился! Проверьте интернет-соединение.');
+    } else {
+      console.log('LiquidFun загружен:', liquidfun);
+    }
+  </script> -->
+    <script type="module" crossorigin src="/Mixing/assets/index-B4PEBSve.js"></script>
+    <link rel="stylesheet" crossorigin href="/Mixing/assets/index-InqCVuDH.css">
   </head>
   <body>
     <div id="app">
@@ -19,6 +34,19 @@
           <div class="slider-track" id="sliderTrack">
           </div>
         </div>
+        <div>
+          <canvas id="matter-canvas"></canvas>
+          <svg>
+            <defs>
+              <filter id="gooey" height="130%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 40 -3" result="goo" />
+              </filter>
+            </defs>
+          </svg>
+        </div>
+        <img id="carton"/>
+        <div class="lower_part_pill"></div>
       </section>
       <section class="three-screen">
         <div class="three-screen__top">
