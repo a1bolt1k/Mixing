@@ -24,8 +24,8 @@
       console.log('LiquidFun загружен:', liquidfun);
     }
   </script> -->
-    <script type="module" crossorigin src="/Mixing/assets/index-B4PEBSve.js"></script>
-    <link rel="stylesheet" crossorigin href="/Mixing/assets/index-InqCVuDH.css">
+    <script type="module" crossorigin src="/Mixing/assets/index-CFFInzks.js"></script>
+    <link rel="stylesheet" crossorigin href="/Mixing/assets/index-B_lWSodG.css">
   </head>
   <body>
     <div id="app">
@@ -34,19 +34,22 @@
           <div class="slider-track" id="sliderTrack">
           </div>
         </div>
-        <div>
-          <canvas id="matter-canvas"></canvas>
-          <svg>
-            <defs>
-              <filter id="gooey" height="130%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 40 -3" result="goo" />
-              </filter>
-            </defs>
-          </svg>
+        <div class="one-screen__container-bottom">
+          <div class="dynamic-text"></div>
+          <div class="dynamic-pill">
+            <canvas id="matter-canvas"></canvas>
+            <svg>
+              <defs>
+                <filter id="gooey" height="130%">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
+                  <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 40 -3" result="goo" />
+                </filter>
+              </defs>
+            </svg>
+            <img src="data:image/svg+xml,%3csvg%20width='231'%20height='176'%20viewBox='0%200%20231%20176'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M79.6784%2023.5173L223.948%2087.9388L187.934%20168.59L43.6646%20104.169C23.493%2095.1612%2014.4425%2071.5069%2023.4499%2051.3352L26.8451%2043.732C35.8525%2023.5603%2059.5068%2014.5099%2079.6784%2023.5173Z'%20fill='%23FF8C42'/%3e%3cpath%20d='M79.6784%2023.5173L223.948%2087.9388L187.934%20168.59L43.6646%20104.169C23.493%2095.1612%2014.4425%2071.5069%2023.4499%2051.3352L26.8451%2043.732C35.8525%2023.5603%2059.5068%2014.5099%2079.6784%2023.5173Z'%20stroke='white'%20stroke-width='10'/%3e%3c/svg%3e" width="165" height="156" class="upper_part_pill"/>
+            <div class="lower_part_pill"></div>
+          </div>
         </div>
-        <img id="carton"/>
-        <div class="lower_part_pill"></div>
       </section>
       <section class="three-screen">
         <div class="three-screen__top">
