@@ -693,3 +693,21 @@ body {
   background-color: #DAC4F7;
 
 }
+
+#svg-container::after {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 508px;
+  height: 554px;
+
+  background-image: url("../image/kontur.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  pointer-events: none;
+  z-index: 1;
+}
