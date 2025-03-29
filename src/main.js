@@ -742,15 +742,13 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(container);
     const colors = ['#78C850', '#FFD700', '#5691F0', '#E85050', '#BC13FE', '#FF8C42'];
     
-    // Создаем 150 пилюль
     for (let i = 0; i < 150; i++) {
       const pill = document.createElement('div');
       pill.className = 'mini-pill';
       
-      // Случайные параметры
-      const size = Math.random() * 10 + 5; // 5-15px
+      const size = Math.random() * 10 + 5;
       const color = colors[Math.floor(Math.random() * colors.length)];
-      const opacity = Math.random() * 0.5 + 0.3; // 0.3-0.8
+      const opacity = Math.random() * 0.5 + 0.3;
       
       Object.assign(pill.style, {
         width: `${size}px`,
