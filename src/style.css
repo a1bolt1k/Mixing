@@ -738,6 +738,21 @@ body {
   animation: scrollText 3s linear infinite;
 }
 
+/* Разные задержки для каждого элемента */
+.scrolling-container:nth-child(1) .scrolling-text:nth-child(1) { animation-delay: 0s; }
+.scrolling-container:nth-child(1) .scrolling-text:nth-child(2) { animation-delay: -0.5s; }
+.scrolling-container:nth-child(1) .scrolling-text:nth-child(3) { animation-delay: -1s; }
+.scrolling-container:nth-child(1) .scrolling-text:nth-child(4) { animation-delay: -1.5s; }
+.scrolling-container:nth-child(1) .scrolling-text:nth-child(5) { animation-delay: -2s; }
+.scrolling-container:nth-child(1) .scrolling-text:nth-child(6) { animation-delay: -2.5s; }
+
+.scrolling-container:nth-child(2) .scrolling-text:nth-child(1) { animation-delay: -0.2s; }
+.scrolling-container:nth-child(2) .scrolling-text:nth-child(2) { animation-delay: -0.7s; }
+.scrolling-container:nth-child(2) .scrolling-text:nth-child(3) { animation-delay: -1.2s; }
+.scrolling-container:nth-child(2) .scrolling-text:nth-child(4) { animation-delay: -1.7s; }
+.scrolling-container:nth-child(2) .scrolling-text:nth-child(5) { animation-delay: -2.2s; }
+.scrolling-container:nth-child(2) .scrolling-text:nth-child(6) { animation-delay: -2.7s; }
+
 @keyframes scrollText {
   0% {
     transform: translateX(100%);
