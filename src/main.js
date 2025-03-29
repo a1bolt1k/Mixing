@@ -265,11 +265,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Добавляем класс для размытия
-        const pillElement = document.querySelector(`[data-id="matter-${pill.id}"]`);
-        if (pillElement) {
-            pillElement.classList.add('pill-blur');
-        }
         
         if (!isStatic) {
             Body.set(pill, {
@@ -356,13 +351,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (collisions.length > 0) {
                         isDragging = true;
                         draggedPill = body;
-                        
-                        const pillElement = document.querySelector(`[data-id="matter-${body.id}"]`);
-                        if (pillElement) {
-                            pillElement.classList.remove('pill-blur');
-                            pillElement.classList.add('pill-no-blur');
-                        }
-                        
                         Body.set(body, { isStatic: false });
                         Sleeping.set(body, false);
                         break;
@@ -379,13 +367,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     mouseConstraint.mouse.element.addEventListener('mouseup', function() {
-        if (isDragging && draggedPill) {
-            const pillElement = document.querySelector(`[data-id="matter-${draggedPill.id}"]`);
-            if (pillElement) {
-                pillElement.classList.remove('pill-no-blur');
-                pillElement.classList.add('pill-blur');
-            }
-        }
         isDragging = false;
         draggedPill = null;
         document.body.style.overflow = '';
@@ -415,12 +396,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (Bounds.contains(body.bounds, mousePos)) {
                     const collisions = Query.point([body], mousePos);
                     if (collisions.length > 0) {
-                        const pillElement = document.querySelector(`[data-id="matter-${body.id}"]`);
-                        if (pillElement) {
-                            pillElement.classList.remove('pill-no-blur');
-                            pillElement.classList.add('pill-blur');
-                        }
-                        
                         Body.setPosition(body, body.initialPosition);
                         Body.setAngle(body, body.initialPosition.angle);
                         Body.setVelocity(body, { x: 0, y: 0 });
@@ -433,7 +408,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
+
     window.addEventListener('resize', function() {
         const newWidth = container.offsetWidth;
         const newHeight = container.offsetHeight;
@@ -466,26 +441,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     container.addEventListener('mouseleave', function() {
-        if (isDragging && draggedPill) {
-            const pillElement = document.querySelector(`[data-id="matter-${draggedPill.id}"]`);
-            if (pillElement) {
-                pillElement.classList.remove('pill-no-blur');
-                pillElement.classList.add('pill-blur');
-            }
-        }
         isDragging = false;
         draggedPill = null;
         document.body.style.overflow = '';
     });
-    
-    setInterval(() => {
-        pills.forEach(pill => {
-            const pillElement = document.querySelector(`[data-id="matter-${pill.id}"]`);
-            if (pillElement && !pillElement.classList.contains('pill-blur') && pill.isStatic) {
-                pillElement.classList.add('pill-blur');
-            }
-        });
-    }, 100);
 });
 
 // Водичка в колбочке
