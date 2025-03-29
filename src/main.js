@@ -763,3 +763,18 @@ document.addEventListener('DOMContentLoaded', () => {
       container.appendChild(pill);
     }
   });
+
+  function restartAnimations() {
+    const elements = document.querySelectorAll('[class^="dynamic-text__element"]');
+    
+    elements.forEach(el => {
+      // Сбрасываем анимацию
+      el.style.animation = 'none';
+      void el.offsetWidth; // Trigger reflow
+      // Включаем заново
+      el.style.animation = '';
+    });
+  }
+  
+  // Перезапускать каждые 18 секунд (длительность цикла)
+  setInterval(restartAnimations, 18000);

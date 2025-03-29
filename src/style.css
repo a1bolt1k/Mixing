@@ -666,10 +666,6 @@ body {
   transform: rotate(30deg);
 }
 
-/* .two-screen__pill:hover {
-  filter: none;
-} */
-
 #svg-container {
   width: 508px;
   height: 555px;
