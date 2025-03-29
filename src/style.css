@@ -622,6 +622,8 @@ body {
 }
 
 .human {
+  position: relative;
+
   display: flex;
   width: 994px;
   height: 968px;
@@ -630,9 +632,14 @@ body {
   background-color: #D6F6DD;
 }
 
-.two-screen__wrapper {
+/* Паттерн маленькие пилюли */
 
+.mini-pill {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
+
 
 .two-screen__pills {
   display: flex;
