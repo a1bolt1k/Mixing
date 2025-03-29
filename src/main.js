@@ -728,7 +728,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const waveAnim = document.getElementById('wave-anim');
     let selectedColor = null;
 
-    // Настройка пилюль для перетаскивания
     pills.forEach(pill => {
       pill.addEventListener('dragstart', (e) => {
         selectedColor = pill.getAttribute('data-color');
@@ -737,7 +736,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Обработчики для зоны сброса
     svg.addEventListener('dragover', (e) => {
       e.preventDefault();
       e.dataTransfer.dropEffect = 'copy';
@@ -748,40 +746,32 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (!selectedColor) return;
       
-      // Сохраняем текущий цвет
       const paths = mainShape.querySelectorAll('path');
       const oldColor = paths[0].getAttribute('fill');
       svg.style.setProperty('--old-color', oldColor);
       svg.style.setProperty('--new-color', selectedColor);
       
-      // Центр SVG (для анимации из центра)
       const centerX = 254;
       const centerY = 277.5;
       
-      // Устанавливаем центр волны
       waveCircle.setAttribute('cx', centerX);
       waveCircle.setAttribute('cy', centerY);
       
-      // Сбрасываем анимацию
+
       waveCircle.setAttribute('r', '0');
       
-      // Применяем временный градиент ко всем path
       paths.forEach(path => {
         path.setAttribute('fill', 'url(#color-gradient)');
       });
       
-      // Временно применяем маску
       mainShape.setAttribute('mask', 'url(#wave-mask)');
       
-      // Запускаем анимацию волны
       waveAnim.beginElement();
       
-      // После анимации устанавливаем окончательный цвет и убираем маску
       setTimeout(() => {
         paths.forEach(path => {
           path.setAttribute('fill', selectedColor);
         });
-        // Убираем маску после анимации
         mainShape.removeAttribute('mask');
       }, 800);
     });

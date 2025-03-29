@@ -711,3 +711,38 @@ body {
   pointer-events: none;
   z-index: 1;
 }
+
+/* Прокручивающийся текст */
+.two-screen__floating-text {
+  display: flex;
+  padding: 50px 95px;
+  gap: 50px;
+}
+
+.scrolling-container {
+  display: flex;
+  flex-direction: column;
+  width: 245px;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  gap: 25px;
+}
+
+.scrolling-text {
+  /* position: absolute; */
+  font-weight: 400;
+  font-size: 40px;
+
+  animation: scrollText 3s linear infinite;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
