@@ -1,5 +1,3 @@
-import './style.css'
-
 const ClasessPillSlider = [
     'pill-slider--explore',
     'pill-slider--enjoy',
@@ -489,3 +487,302 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, 100);
 });
+
+// Водичка в колбочке
+const canvas = document.querySelector('#matter-canvas')
+let canvasWidth = 740;
+let canvasHeight = 684;
+
+const stdDeviation = [8, 10]
+const colorMatrix = ['15 -3', '30 -5']
+
+window.addEventListener('DOMContentLoaded', () => {
+  const { Engine, Render, Runner, Bodies, Composite, Mouse, MouseConstraint, Events, Body } = Matter
+
+  let engine, render, runner, mouse, mouseConstraint
+
+  let circles = []
+  let glass
+
+  function init() {
+    engine = Engine.create({
+      constraintIterations: 10,
+      positionIterations: 10
+    })
+
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+
+    render = Render.create({
+      canvas: canvas,
+      engine: engine,
+      options: {
+        width: canvasWidth,
+        height: canvasHeight,
+        wireframes: false,
+        background: 'transparent',
+        pixelRatio: 1
+      }
+    })
+
+    mouse = Mouse.create(canvas)
+
+    mouseConstraint = MouseConstraint.create(engine, {
+      mouse: mouse,
+      constraint: {
+        stiffness: 0.1,
+        render: { visible: false }
+      }
+    })
+
+    runner = Runner.create()
+
+    Render.run(render)
+    Runner.run(runner, engine)
+
+    mouse.element.removeEventListener('mousewheel', mouse.mousewheel)
+    mouse.element.removeEventListener('DOMMouseScroll', mouse.mousewheel)
+    Composite.add(engine.world, mouseConstraint)
+  }
+
+  function createLiquid() {
+    const x = 340
+    const y = 286
+    const radius = randomNumBetween(6, 7)
+    const body = Bodies.circle(x, y, radius, {
+      friction: 0,
+      density: 1,
+      frictionAir: 0,
+      restitution: 0.7,
+      render: { fillStyle: '#FF8C42' }
+    })
+    Body.applyForce(body, body.position, { x: 1, y: 0 })
+    Composite.add(engine.world, body)
+    circles.push(body)
+  }
+
+  function Glass() {
+    const glassImg = document.querySelector('.lower_part_pill');
+    if (!glassImg) {
+        console.error('Элемент .lower_part_pill не найден!');
+        return;
+    }
+
+    this.cx = canvasWidth * 0.5;
+    this.cy = canvasHeight * 0.7;
+
+    const imgWidth = 100;
+    const imgHeight = 208;
+    const imgOffsetX = imgWidth / 2;
+    const imgOffsetY = imgHeight / 2;
+
+    console.log();
+
+    glassImg.style.left = `${this.cx - imgOffsetX}px`;
+    glassImg.style.top = `${this.cy - imgOffsetY}px`;
+    glassImg.style.transformOrigin = 'center center';
+
+    const wallThickness = 25;
+    const wallColor = 'rgba(0,0,0,0)';
+
+    const leftWall = Bodies.rectangle(
+        this.cx - imgOffsetX + wallThickness/2,
+        this.cy,
+        wallThickness,
+        imgHeight * 1.4,
+        {
+            isStatic: true,
+            angle: Math.PI / 180 * -30,
+            chamfer: { radius: 10 },
+            render: {
+                fillStyle: wallColor,
+                visible: false
+            }
+        }
+    );
+
+    const rightWall = Bodies.rectangle(
+        this.cx + imgOffsetX + 12 - wallThickness/2,
+        this.cy - 60,
+        wallThickness,
+        imgHeight * 1,
+        {
+            isStatic: true,
+            angle: Math.PI / 180 * -30,
+            // chamfer: { radius: 10 },
+            render: {
+                fillStyle: wallColor,
+                visible: false
+            }
+        }
+    );
+
+    const bottom = Bodies.rectangle(
+        this.cx + imgOffsetX + wallThickness,
+        this.cy + imgOffsetY - wallThickness - 25,
+        imgWidth * 1.1,
+        wallThickness * 1.5,
+        {
+            isStatic: true,
+            // chamfer: { radius: 30 },
+            angle: Math.PI / 180 * -30,  
+            render: {
+                fillStyle: wallColor,
+                visible: false
+            }
+        }
+    );
+
+    Composite.add(engine.world, [leftWall, rightWall, bottom]);
+
+    this.setPosition = (pos) => {
+        const dx = pos.x - this.cx;
+        const dy = pos.y - this.cy;
+
+        Body.setPosition(leftWall, { 
+            x: leftWall.position.x + dx, 
+            y: leftWall.position.y + dy 
+        });
+        
+        Body.setPosition(rightWall, { 
+            x: rightWall.position.x + dx, 
+            y: rightWall.position.y + dy 
+        });
+        
+        Body.setPosition(bottom, { 
+            x: bottom.position.x + dx, 
+            y: bottom.position.y + dy 
+        });
+
+        glassImg.style.left = `${pos.x - imgOffsetX + 10}px`;
+        glassImg.style.top = `${pos.y - imgOffsetY - 19}px`;
+        
+        const tilt = dx * 0.03;
+        glassImg.style.transform = `rotate(${tilt}deg)`;
+
+        this.cx = pos.x;
+        this.cy = pos.y;
+    };
+
+    this.setPosition({ x: this.cx, y: this.cy });
+}
+
+  init()
+  resizeFilter()
+  glass = new Glass()
+
+  Events.on(mouseConstraint, "mousemove", e => {
+    glass.setPosition({
+      x: e.mouse.position.x - 70,
+      y: e.mouse.position.y
+    })
+  })
+
+  let tickCounter = 0;
+  const spawnRate = 1;
+
+  Events.on(runner, 'tick', e => {
+    tickCounter++;
+    if (tickCounter % spawnRate === 0) {
+      createLiquid();
+    }
+    for (let i = circles.length - 1; i >= 0; i--) {
+      if (circles[i].position.y - circles[i].circleRadius > canvasHeight) {
+        Composite.remove(engine.world, circles[i])
+        circles.splice(i, 1)
+      }
+    }
+  })
+
+  function resizeFilter() {
+    const feGaussianBlur = document.querySelector('#gooey feGaussianBlur')
+    const feColorMatrix = document.querySelector('#gooey feColorMatrix')
+    let index
+    if (canvasWidth < 600) index = 0
+    else index = 1
+    feGaussianBlur.setAttribute('stdDeviation', stdDeviation[index])
+    feColorMatrix.setAttribute('values', `1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 ${colorMatrix[index]}`)
+  }
+
+  window.addEventListener('resize', () => {
+    canvasWidth = innerWidth
+    canvasHeight = innerHeight
+    render.canvas.width = canvasWidth
+    render.canvas.height = canvasHeight
+    resizeFilter()
+
+    glass.setPosition({ x: canvasWidth * 0.5, y: canvasHeight * 0.8 })
+  })
+})
+
+function randomNumBetween(min, max) {
+  return Math.random() * (max - min) + min
+}
+
+// Человек
+document.addEventListener('DOMContentLoaded', () => {
+    const pills = document.querySelectorAll('.two-screen__pill');
+    const svg = document.getElementById('target-svg');
+    const mainShape = document.getElementById('main-shape');
+    const waveCircle = document.getElementById('wave-circle');
+    const waveAnim = document.getElementById('wave-anim');
+    let selectedColor = null;
+
+    // Настройка пилюль для перетаскивания
+    pills.forEach(pill => {
+      pill.addEventListener('dragstart', (e) => {
+        selectedColor = pill.getAttribute('data-color');
+        e.dataTransfer.setData('text/plain', 'color');
+        e.dataTransfer.effectAllowed = 'copy';
+      });
+    });
+
+    // Обработчики для зоны сброса
+    svg.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+    });
+
+    svg.addEventListener('drop', (e) => {
+      e.preventDefault();
+      
+      if (!selectedColor) return;
+      
+      // Сохраняем текущий цвет
+      const paths = mainShape.querySelectorAll('path');
+      const oldColor = paths[0].getAttribute('fill');
+      svg.style.setProperty('--old-color', oldColor);
+      svg.style.setProperty('--new-color', selectedColor);
+      
+      // Центр SVG (для анимации из центра)
+      const centerX = 254;
+      const centerY = 277.5;
+      
+      // Устанавливаем центр волны
+      waveCircle.setAttribute('cx', centerX);
+      waveCircle.setAttribute('cy', centerY);
+      
+      // Сбрасываем анимацию
+      waveCircle.setAttribute('r', '0');
+      
+      // Применяем временный градиент ко всем path
+      paths.forEach(path => {
+        path.setAttribute('fill', 'url(#color-gradient)');
+      });
+      
+      // Временно применяем маску
+      mainShape.setAttribute('mask', 'url(#wave-mask)');
+      
+      // Запускаем анимацию волны
+      waveAnim.beginElement();
+      
+      // После анимации устанавливаем окончательный цвет и убираем маску
+      setTimeout(() => {
+        paths.forEach(path => {
+          path.setAttribute('fill', selectedColor);
+        });
+        // Убираем маску после анимации
+        mainShape.removeAttribute('mask');
+      }, 800);
+    });
+  });

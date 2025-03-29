@@ -13,5 +13,8 @@
   "devDependencies": {
     "gh-pages": "6.3.0",
     "vite": "^6.2.0"
+  },
+  "dependencies": {
+    "liquidfun-emscripten": "^1.1.4"
   }
 }

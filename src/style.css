@@ -140,6 +140,8 @@ body {
 
 /* Пилюли */
 .three-screen__bottom {
+  width: 1916px;
+  margin: 0 auto;
   justify-content: space-between;
 }
 
@@ -361,4 +363,333 @@ body {
 @keyframes flowColors {
   0% { background-position: 0% center; }
   100% { background-position: 100% center; }
+}
+
+/* Водичка в колбочке~ */
+.dynamic-pill {
+  position: relative;
+  width: 740px;
+  height: 684px;
+
+  background-color: #DAC4F7;
+  border-radius: 60px;
+}
+
+#matter-canvas {
+  width: 740px;
+  height: 684px;
+  filter: url(#gooey);
+  flex-shrink: 0;
+}
+
+.upper_part_pill {
+  position: absolute;
+  pointer-events: none;
+
+  top: 145px;
+  left: 152px;
+
+  z-index: 10;
+}
+
+
+.lower_part_pill {
+  position: absolute;
+  pointer-events: none;
+
+  height: 200px;
+  width: 99px;
+  border: 10px solid white;
+  transform: rotate(-30deg) !important;
+  transform-origin: center;
+  will-change: transform;
+
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+
+  z-index: 10;
+}
+
+/* Динамический текст */
+
+.one-screen {
+  display: flex;
+  flex-direction: column;
+}
+
+.one-screen__container-bottom {
+  display: flex;
+  width: 1878px;
+  margin: 0 auto;
+  padding: 46px 0;
+  gap: 92px;
+}
+
+.dynamic-text {
+  position: relative;
+
+  width: 1018px;
+  height: 684px;
+
+  background-color: #F4989C;
+  border-radius: 60px;
+}
+
+.dynamic-text__element {
+  position: absolute;
+
+  padding: 17px 25px;
+
+  font-weight: 400;
+  font-size: 48px;
+  text-align: center;
+
+  opacity: 0;
+
+  transition: opacity 0.5s ease-in-out;
+  
+  border-radius: 80px;
+  filter: blur(10px);
+}
+
+.dynamic-text__element:hover {
+  filter: none;
+}
+
+
+.dynamic-text__element--understand {
+  top: 64px;
+  left: 92px;
+
+  color: #FFD700;
+
+  border: 10px solid #BC13FE;
+}
+
+.dynamic-text__element--yourself {
+  top: 434px;
+  left: 512px;
+
+  padding: 17px 34px;
+
+  color: #FF8C42;
+
+  border: 10px solid #E85050;
+}
+
+.dynamic-text__element--fully {
+  top: 509px;
+  left: 92px;
+
+  padding: 17px 94px;
+
+  color: #BC13FE;
+
+  border: 10px solid #78C850;
+}
+
+.dynamic-text__element--believe {
+  top: 44px;
+  left: 509px;
+
+  padding: 17px 67px;
+
+  color: #FF8C42;
+
+  border: 10px solid #E85050;
+}
+
+.dynamic-text__element--in-your {
+  top: 191px;
+  left: 172px;
+
+  padding: 17px 69px;
+
+  color: #BC13FE;
+
+  border: 10px solid #78C850;
+}
+
+.dynamic-text__element--possibilities {
+  top: 281px;
+  left: 522px;
+
+  padding: 25px 54px;
+
+  color: #E85050;
+
+  border: 10px solid #5691F0;
+}
+
+.dynamic-text__element--try {
+  top: 151px;
+  left: 552px;
+
+  padding: 17px 110px;
+
+  color: #E85050;
+
+  border: 10px solid #5691F0;
+}
+
+.dynamic-text__element--your {
+  top: 301px;
+  left: 207px;
+
+  padding: 17px 91px;
+
+  color: #78C850;
+
+  border: 10px solid #FFD700;
+}
+
+.dynamic-text__element--wishes {
+  top: 541px;
+  left: 637px;
+
+  padding: 17px 71px;
+
+  color: #5691F0;
+
+  border: 10px solid #FF8C42;
+}
+
+.dynamic-text__element--understand {
+  animation: 
+    fadeIn 0.5s 0s forwards,
+    fadeOut 0.5s 6s forwards;
+}
+.dynamic-text__element--yourself {
+  animation: 
+    fadeIn 0.5s 2s forwards,
+    fadeOut 0.5s 6s forwards;
+}
+.dynamic-text__element--fully {
+  animation: 
+    fadeIn 0.5s 4s forwards,
+    fadeOut 0.5s 6s forwards;
+}
+
+.dynamic-text__element--believe {
+  animation: 
+    fadeIn 0.5s 8s forwards,
+    fadeOut 0.5s 14s forwards;
+}
+.dynamic-text__element--in-your {
+  animation: 
+    fadeIn 0.5s 10s forwards,
+    fadeOut 0.5s 14s forwards;
+}
+.dynamic-text__element--possibilities {
+  animation: 
+    fadeIn 0.5s 12s forwards,
+    fadeOut 0.5s 14s forwards;
+}
+
+.dynamic-text__element--try {
+  animation: 
+    fadeIn 0.5s 16s forwards,
+    fadeOut 0.5s 22s forwards;
+}
+.dynamic-text__element--your {
+  animation: 
+    fadeIn 0.5s 18s forwards,
+    fadeOut 0.5s 22s forwards;
+}
+.dynamic-text__element--wishes {
+  animation: 
+    fadeIn 0.5s 20s forwards,
+    fadeOut 0.5s 22s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Человек */
+.two-screen {
+  display: flex;
+  width: 1878px;
+  margin: 0 auto;
+  padding: 50px 0;
+  gap: 83px;
+}
+
+.human {
+  display: flex;
+  width: 994px;
+  height: 968px;
+  
+  border-radius: 60px;
+  background-color: #D6F6DD;
+}
+
+.two-screen__wrapper {
+
+}
+
+.two-screen__pills {
+  display: flex;
+  width: 764px;
+  height: 522px;
+  padding: 57px 58px;
+  flex-wrap: wrap;
+
+  background-color: #ACECF7;
+  border-radius: 60px;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.two-screen__pill {
+  width: 85px;
+  height: 210px;
+  border-radius: 60px;
+  margin: 0 60px;
+  cursor: pointer;
+
+  filter: blur(20px);
+
+  transform: rotate(30deg);
+}
+
+/* .two-screen__pill:hover {
+  filter: none;
+} */
+
+#svg-container {
+  width: 508px;
+  height: 555px;
+  margin: auto;
+  position: relative;
+}
+    
+.color-overlay {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--pill-color) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: width 0.8s ease-out, height 0.8s ease-out;
+  opacity: 0.8;
+  mix-blend-mode: multiply;
+  z-index: 10;
+}
+
+.two-screen__floating-text {
+  width: 764px;
+  height: 441px;
+  margin-top: 25px;
+
+  border-radius: 60px;
+  background-color: #DAC4F7;
+
 }
